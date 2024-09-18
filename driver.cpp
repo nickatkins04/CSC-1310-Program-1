@@ -35,6 +35,8 @@ int main()
                 cout << "Day: ", cin >> day, cout << endl;
                 cout << "Month: ", cin >> month, cout << endl;
                 cout << "Year: ", cin >> year, cout << endl;
+
+                // FUNCTION ALL THIS DEAR GOD (And maybe find a way to use a loop somehow if possible)
                 //Use month to get minimum day num and add day to find number then use number to determine sign
                 /*
                     Jan: 0
@@ -50,14 +52,57 @@ int main()
                     Nov: 304
                     Dec: 334
                 */
-                if (month == 1)
+                if (month == 1) // Jan
                 {
                     monthMin = 0;
                 }
-                else if (month == 2)
+                else if (month == 2) // Feb
+                {
+                    monthMin = 31;
+                }
+                else if (month == 3) // Mar
+                {
+                    monthMin = 59;
+                }
+                else if (month == 4) // Apr
+                {
+                    monthMin = 90;
+                }
+                else if (month == 5) // May
+                {
+                    monthMin = 120;
+                }
+                else if (month == 6) // Jun
+                {
+                    monthMin = 151;
+                }
+                else if (month == 7) // Jul
+                {
+                    monthMin = 181;
+                }
+                else if (month == 8) // Aug
+                {
+                    monthMin = 212;
+                }
+                else if (month == 9) // Sep
+                {
+                    monthMin = 243;
+                }
+                else if (month == 10) // Oct
+                {
+                    monthMin = 273;
+                }
+                else if (month == 11) // Nov
+                {
+                    monthMin = 304;
+                }
+                else if (month == 12) // Dec
+                {
+                    monthMin = 334;
+                }
                 daySum = monthMin + day;
                 cout << "daySum: " << daySum << endl;
-                // FUNCTION THIS
+                
                 // Aries
                 if(daySum >= 80 and daySum <= 109)
                 {
