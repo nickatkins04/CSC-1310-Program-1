@@ -1,12 +1,14 @@
 #include <iostream>
 using namespace std;
 int main()
+
 {
+    short determineSign(int, int);
     // main menu function variables
     short selection;
     bool mainMenu = true, enteringProfileData;
     // Profile function variables
-    short day, month, year, sign, monthMin;
+    short day, month, year, sign;
     string name;
     char profileDataCheck;
     string zodiacMonthSigns[12] = {"Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"};
@@ -36,135 +38,8 @@ int main()
                 cout << "Month: ", cin >> month, cout << endl;
                 cout << "Year: ", cin >> year, cout << endl;
 
-                // FUNCTION ALL THIS DEAR GOD (And maybe find a way to use a loop somehow if possible)
-                //Use month to get minimum day num and add day to find number then use number to determine sign
-                /*
-                    Jan: 0
-                    Feb: 31
-                    Mar: 59
-                    Apr: 90
-                    May: 120
-                    Jun: 151
-                    Jul: 181
-                    Aug: 212
-                    Sep: 243
-                    Oct: 273
-                    Nov: 304
-                    Dec: 334
-                */
-                if (month == 1) // Jan
-                {
-                    monthMin = 0;
-                }
-                else if (month == 2) // Feb
-                {
-                    monthMin = 31;
-                }
-                else if (month == 3) // Mar
-                {
-                    monthMin = 59;
-                }
-                else if (month == 4) // Apr
-                {
-                    monthMin = 90;
-                }
-                else if (month == 5) // May
-                {
-                    monthMin = 120;
-                }
-                else if (month == 6) // Jun
-                {
-                    monthMin = 151;
-                }
-                else if (month == 7) // Jul
-                {
-                    monthMin = 181;
-                }
-                else if (month == 8) // Aug
-                {
-                    monthMin = 212;
-                }
-                else if (month == 9) // Sep
-                {
-                    monthMin = 243;
-                }
-                else if (month == 10) // Oct
-                {
-                    monthMin = 273;
-                }
-                else if (month == 11) // Nov
-                {
-                    monthMin = 304;
-                }
-                else if (month == 12) // Dec
-                {
-                    monthMin = 334;
-                }
-                daySum = monthMin + day;
-                cout << "daySum: " << daySum << endl;
+                sign = determineSign(month, day);
                 
-                // Aries
-                if(daySum >= 80 and daySum <= 109)
-                {
-                    sign = 0;
-                }
-                // Taurus
-                else if (daySum > 109 and daySum <= 140)
-                {
-                    sign = 1;
-                }
-                // Gemini
-                else if (daySum > 140 and daySum <= 171)
-                {
-                    sign = 2;
-                }
-                // Cancer
-                else if (daySum > 171 and daySum <= 203)
-                {
-                    sign = 3;
-                }
-                // Leo
-                else if (daySum > 203 and daySum <= 234)
-                {
-                    sign = 4;
-                }
-                // Virgo
-                else if (daySum > 234 and daySum <= 265)
-                {
-                    sign = 5;
-                }
-                // Libra
-                else if (daySum > 265 and daySum <= 295)
-                {
-                    sign = 6;
-                }
-                // Scorpio
-                else if (daySum > 295 and daySum <= 325)
-                {
-                    sign = 7;
-                }
-                // Sagittarius
-                else if (daySum > 325 and daySum <= 355)
-                {
-                    sign = 8;
-                }
-
-                // Capricorn
-                else if (daySum > 355 and daySum <= 19)
-                {
-                    sign = 9;
-                }
-                // Aquarius
-                else if (daySum > 19 and daySum <= 49)
-                {
-                    sign = 10;
-                }
-                // Pisces
-                else if (daySum > 49 and daySum <= 79)
-                {
-                    sign = 11;
-                }
-
                 //Function for printing out profile info
                 cout << "Here is your profile:" << endl;
                 cout << "Name: " << name << endl;
@@ -182,4 +57,142 @@ int main()
     }
     
     return 0;
+}
+
+short determineSign(int month, int day)
+{
+    short sign;
+    short monthMin;
+    short daySum;
+    //Use month to get minimum day num and add day to find number then use number to determine sign
+    
+    /*
+        Jan: 0
+        Feb: 31
+        Mar: 59
+        Apr: 90
+        May: 120
+        Jun: 151
+        Jul: 181
+        Aug: 212
+        Sep: 243
+        Oct: 273
+        Nov: 304
+        Dec: 334
+    */
+    
+    // find a way to use a loop somehow if possible on both massive if-else if things
+    if (month == 1) // Jan
+    {
+        monthMin = 0;
+    }
+    else if (month == 2) // Feb
+    {
+        monthMin = 31;
+    }
+    else if (month == 3) // Mar
+    {
+        monthMin = 59;
+    }
+    else if (month == 4) // Apr
+    {
+        monthMin = 90;
+    }
+    else if (month == 5) // May
+    {
+        monthMin = 120;
+    }
+    else if (month == 6) // Jun
+    {
+        monthMin = 151;
+    }
+    else if (month == 7) // Jul
+    {
+        monthMin = 181;
+    }
+    else if (month == 8) // Aug
+    {
+        monthMin = 212;
+    }
+    else if (month == 9) // Sep
+    {
+        monthMin = 243;
+    }
+    else if (month == 10) // Oct
+    {
+        monthMin = 273;
+    }
+    else if (month == 11) // Nov
+    {
+        monthMin = 304;
+    }
+    else if (month == 12) // Dec
+    {
+        monthMin = 334;
+    }
+    daySum = monthMin + day;
+
+    
+    // Aries
+    if(daySum >= 80 and daySum <= 109)
+    {
+        sign = 0;
+    }
+    // Taurus
+    else if (daySum > 109 and daySum <= 140)
+    {
+        sign = 1;
+    }
+    // Gemini
+    else if (daySum > 140 and daySum <= 171)
+    {
+        sign = 2;
+    }
+    // Cancer
+    else if (daySum > 171 and daySum <= 203)
+    {
+        sign = 3;
+    }
+    // Leo
+    else if (daySum > 203 and daySum <= 234)
+    {
+        sign = 4;
+    }
+    // Virgo
+    else if (daySum > 234 and daySum <= 265)
+    {
+        sign = 5;
+    }
+    // Libra
+    else if (daySum > 265 and daySum <= 295)
+    {
+        sign = 6;
+    }
+    // Scorpio
+    else if (daySum > 295 and daySum <= 325)
+    {
+        sign = 7;
+    }
+    // Sagittarius
+    else if (daySum > 325 and daySum <= 355)
+    {
+        sign = 8;
+    }
+    // Capricorn
+    else if (daySum > 355 and daySum <= 19)
+    {
+        sign = 9;
+    }
+    // Aquarius
+    else if (daySum > 19 and daySum <= 49)
+    {
+        sign = 10;
+    }
+    // Pisces
+    else if (daySum > 49 and daySum <= 79)
+    {
+        sign = 11;
+    }
+
+    return sign;
 }
