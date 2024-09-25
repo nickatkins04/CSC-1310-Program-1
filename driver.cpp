@@ -1,198 +1,150 @@
 #include <iostream>
 using namespace std;
 int main()
-
 {
-    short determineSign(int, int);
+    system("CLS");
+    short determineSign(short, short);
     // main menu function variables
     short selection;
-    bool mainMenu = true, enteringProfileData;
+    bool mainMenu = true, enteringProfileData = false, selectingProfile = false, viewingProfile = false,mainLoop = true;;
     // Profile function variables
     short day, month, year, sign;
+    string zodiacMonthSigns[12] = {"Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"};
     string name;
     char profileDataCheck;
-    string zodiacMonthSigns[12] = {"Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"};
-    int daySum;
-
-    while(mainMenu)
+    while (mainLoop)
     {
-        // This is going to be the code with as few functions as possible (I'll make them later)
-        // Perhaps this whole main menu can be a function?
-        cout << "Welcome to Horoscope!" << endl;
-        cout << "1. Enter your information to find your horoscope!" << endl; // User save info prompt is later
-        cout << "2. Select from profiles." << endl; //Future feature, useless now                         
-        cout << "Choice: ", cin >> selection, cout << endl;
-        cin.ignore();
-        // return selection + end of function (back in driver)
-        if (selection > 0 and selection < 3)
+        while(mainMenu)
         {
-            mainMenu = false;
-            // Function call to horoscope profile information getter thing (later)
-            // Also supposed to use a class here but we getting big lazy for now
-            enteringProfileData = true;
-            while (enteringProfileData)
+            // This is going to be the code with as few functions as possible (I'll make them later)
+            // Perhaps this whole main menu can be a function?
+            cout << "Welcome to Horoscope!" << endl;
+            cout << "1. Enter your information to find your horoscope!" << endl; // User save info prompt is later
+            cout << "2. Select from profiles." << endl; //Future feature, useless now                         
+            cout << "Choice: ", cin >> selection, cout << endl;
+            cin.ignore();
+            // return selection + end of function (back in driver)
+            switch (selection)
             {
-                cout << "Enter your full name: ", getline(cin, name), cout << endl;
-                cout << "Enter your birthday in a dy/mt/year format:" << endl;
-                cout << "Day: ", cin >> day, cout << endl;
-                cout << "Month: ", cin >> month, cout << endl;
-                cout << "Year: ", cin >> year, cout << endl;
-
-                sign = determineSign(month, day);
-                
-                //Function for printing out profile info
-                cout << "Here is your profile:" << endl;
-                cout << "Name: " << name << endl;
-                cout << "Birthday: " << day << "/" << month << "/" << year << endl;
-                cout << "Is this data correct? (y/n): ", cin >> profileDataCheck, cout << endl;
-                if (profileDataCheck == 'y' or profileDataCheck == 'Y')
-                {
-                    cout << "Zodiac Sign: " << zodiacMonthSigns[sign] << endl;
-                    enteringProfileData = false;
-                }
+            case 1:
+                enteringProfileData = true;
+                mainMenu = false;
+                break;
+            case 2:
+                selectingProfile = true;
+                mainMenu = false;
+                break;
             }
-            
+            system("CLS");
         }
         
+        while (enteringProfileData)
+        {
+            cout << "Enter your full name: ", getline(cin, name), cout << endl;
+            cout << "Enter your birthday in a mt/dy/year format:" << endl;
+            cout << "Month: ", cin >> month, cout << endl;
+            cout << "Day: ", cin >> day, cout << endl;
+            cout << "Year: ", cin >> year, cout << endl;
+
+            sign = determineSign(month, day);
+            system("CLS");
+            
+            //Function for printing out profile info
+            cout << "Here is your profile:" << endl;
+            cout << "Name: " << name << endl;
+            cout << "Birthday: " << month << "/" << day << "/" << year << endl;
+            cout << "Is this data correct? (y/n): ", cin >> profileDataCheck, cout << endl;
+            cin.ignore();
+            if (profileDataCheck == 'y' or profileDataCheck == 'Y')
+            {
+                cout << "Zodiac Sign: " << zodiacMonthSigns[sign] << endl;
+                enteringProfileData = false;
+                viewingProfile = true;
+            }
+            system("CLS");
+        }   
+        while (selectingProfile) // Function call to horoscope profile information getter thing (later)
+        {
+            cout << "No profiles available at this time" << endl;
+            cout << "Hit enter to continue. " << endl;
+            cin.get();
+            selectingProfile = false;
+            system("CLS");
+        }
+        while (viewingProfile)
+        {
+            cout << "==============================" << endl;
+            cout << name << "\'s profile" << endl;
+            cout << "==============================" << endl;
+            cout << "Sign: " << zodiacMonthSigns[sign] << endl;
+            cout << "------------------------------" << endl;
+            cout << "1. View Horoscope" << endl;
+            cout << "2. Compare with other profiles" << endl;
+            cout << "3. Edit profile" << endl; 
+            cout << "4. Go back to main menu" << endl;
+            cout << "------------------------------" << endl;
+            cout << "Selection: ", cin >> selection, cout << endl;
+            switch (selection)
+            {
+            case 1:
+                cout << "Daily Horoscope: " << endl;
+                /*
+                    Pull from a list of premade horoscopes and have it cycle through each day of the week
+                */
+                break;
+            case 2:
+                cout << "===================================" << endl;
+                cout << "No profiles available at this time." << endl;
+                cout << "Hit enter to continue. \n===================================" << endl;
+                cin.ignore();
+                cin.get();
+                system("CLS");
+                break;
+            case 3:
+                enteringProfileData = true;
+                viewingProfile = false;
+                break;
+            case 4: 
+                mainMenu = true;
+                viewingProfile = false;
+                break;
+            }
+        }
     }
-    
     return 0;
 }
 
-short determineSign(int month, int day)
+short determineSign(short month, short day)
 {
+    short monthMin[12] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+    // Define the zodiac sign ranges
+    short zodiacRanges[12][12] = {
+        {80, 109},   // Aries
+        {110, 140},  // Taurus
+        {141, 171},  // Gemini
+        {172, 203},  // Cancer
+        {204, 234},  // Leo
+        {235, 265},  // Virgo
+        {266, 295},  // Libra
+        {296, 325},  // Scorpio
+        {326, 355},  // Sagittarius
+        {356, 19},   // Capricorn (wraps around)
+        {20, 49},    // Aquarius
+        {50, 79}     // Pisces
+    };
     short sign;
-    short monthMin;
     short daySum;
-    //Use month to get minimum day num and add day to find number then use number to determine sign
-    
-    /*
-        Jan: 0
-        Feb: 31
-        Mar: 59
-        Apr: 90
-        May: 120
-        Jun: 151
-        Jul: 181
-        Aug: 212
-        Sep: 243
-        Oct: 273
-        Nov: 304
-        Dec: 334
-    */
-    
-    // find a way to use a loop somehow if possible on both massive if-else if things
-    if (month == 1) // Jan
-    {
-        monthMin = 0;
-    }
-    else if (month == 2) // Feb
-    {
-        monthMin = 31;
-    }
-    else if (month == 3) // Mar
-    {
-        monthMin = 59;
-    }
-    else if (month == 4) // Apr
-    {
-        monthMin = 90;
-    }
-    else if (month == 5) // May
-    {
-        monthMin = 120;
-    }
-    else if (month == 6) // Jun
-    {
-        monthMin = 151;
-    }
-    else if (month == 7) // Jul
-    {
-        monthMin = 181;
-    }
-    else if (month == 8) // Aug
-    {
-        monthMin = 212;
-    }
-    else if (month == 9) // Sep
-    {
-        monthMin = 243;
-    }
-    else if (month == 10) // Oct
-    {
-        monthMin = 273;
-    }
-    else if (month == 11) // Nov
-    {
-        monthMin = 304;
-    }
-    else if (month == 12) // Dec
-    {
-        monthMin = 334;
-    }
-    daySum = monthMin + day;
 
-    
-    // Aries
-    if(daySum >= 80 and daySum <= 109)
-    {
-        sign = 0;
-    }
-    // Taurus
-    else if (daySum > 109 and daySum <= 140)
-    {
-        sign = 1;
-    }
-    // Gemini
-    else if (daySum > 140 and daySum <= 171)
-    {
-        sign = 2;
-    }
-    // Cancer
-    else if (daySum > 171 and daySum <= 203)
-    {
-        sign = 3;
-    }
-    // Leo
-    else if (daySum > 203 and daySum <= 234)
-    {
-        sign = 4;
-    }
-    // Virgo
-    else if (daySum > 234 and daySum <= 265)
-    {
-        sign = 5;
-    }
-    // Libra
-    else if (daySum > 265 and daySum <= 295)
-    {
-        sign = 6;
-    }
-    // Scorpio
-    else if (daySum > 295 and daySum <= 325)
-    {
-        sign = 7;
-    }
-    // Sagittarius
-    else if (daySum > 325 and daySum <= 355)
-    {
-        sign = 8;
-    }
-    // Capricorn
-    else if (daySum > 355 and daySum <= 19)
-    {
-        sign = 9;
-    }
-    // Aquarius
-    else if (daySum > 19 and daySum <= 49)
-    {
-        sign = 10;
-    }
-    // Pisces
-    else if (daySum > 49 and daySum <= 79)
-    {
-        sign = 11;
-    }
+    daySum = monthMin[month - 1] + day;
 
+    // Determine zodiac sign based on daySum
+    for (int i = 0; i < 12; i++) 
+    {
+        if (daySum >= zodiacRanges[i][0] && daySum <= zodiacRanges[i][1]) 
+        {
+            sign = i;
+            break;
+        }
+    }
     return sign;
 }
