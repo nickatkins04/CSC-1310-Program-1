@@ -1,9 +1,19 @@
 #include <iostream>
+#include "users.cpp"
+#include "userData.h"
+#include "userData.cpp"
+#include "users.h"
+
 using namespace std;
+
 int main()
 {
     system("CLS");
-    short determineSign(short, short);
+
+    UserData** dataArr;
+
+    dataArr = new UserData*[5];
+
     // main menu function variables
     short selection;
     bool mainMenu = true, enteringProfileData = false, selectingProfile = false, viewingProfile = false,mainLoop = true;;
@@ -47,6 +57,9 @@ int main()
             cout << "Year: ", cin >> year, cout << endl;
 
             sign = determineSign(month, day);
+
+            dataArr[5] = new UserData(name, month, day, year, sign);
+
             system("CLS");
             
             //Function for printing out profile info
@@ -114,37 +127,37 @@ int main()
     return 0;
 }
 
-short determineSign(short month, short day)
-{
-    short monthMin[12] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
-    // Define the zodiac sign ranges
-    short zodiacRanges[12][12] = {
-        {80, 109},   // Aries
-        {110, 140},  // Taurus
-        {141, 171},  // Gemini
-        {172, 203},  // Cancer
-        {204, 234},  // Leo
-        {235, 265},  // Virgo
-        {266, 295},  // Libra
-        {296, 325},  // Scorpio
-        {326, 355},  // Sagittarius
-        {356, 19},   // Capricorn (wraps around)
-        {20, 49},    // Aquarius
-        {50, 79}     // Pisces
-    };
-    short sign;
-    short daySum;
+// short determineSign(short month, short day)
+// {
+//     short monthMin[12] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+//     // Define the zodiac sign ranges
+//     short zodiacRanges[12][12] = {
+//         {80, 109},   // Aries
+//         {110, 140},  // Taurus
+//         {141, 171},  // Gemini
+//         {172, 203},  // Cancer
+//         {204, 234},  // Leo
+//         {235, 265},  // Virgo
+//         {266, 295},  // Libra
+//         {296, 325},  // Scorpio
+//         {326, 355},  // Sagittarius
+//         {356, 19},   // Capricorn (wraps around)
+//         {20, 49},    // Aquarius
+//         {50, 79}     // Pisces
+//     };
+//     short sign;
+//     short daySum;
 
-    daySum = monthMin[month - 1] + day;
+//     daySum = monthMin[month - 1] + day;
 
-    // Determine zodiac sign based on daySum
-    for (int i = 0; i < 12; i++) 
-    {
-        if (daySum >= zodiacRanges[i][0] && daySum <= zodiacRanges[i][1]) 
-        {
-            sign = i;
-            break;
-        }
-    }
-    return sign;
-}
+//     // Determine zodiac sign based on daySum
+//     for (int i = 0; i < 12; i++) 
+//     {
+//         if (daySum >= zodiacRanges[i][0] && daySum <= zodiacRanges[i][1]) 
+//         {
+//             sign = i;
+//             break;
+//         }
+//     }
+//     return sign;
+// }
