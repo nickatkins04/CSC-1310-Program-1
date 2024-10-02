@@ -1,13 +1,16 @@
+/*
 #include <iostream>
 using namespace std;
 
     int num;
 
- int main(){
+void printOut()
+{
 
     cin >> num;
     
-    if(num == 1){
+    if(num == 1)
+    {
         cout << "You are an Aries!\n" << endl;
 
         cout << "Aries is the first sign of the zodiac,"
@@ -163,8 +166,5 @@ using namespace std;
     
         cout << "Millie Bobby Brown, Stephen Curry, and George Washington." << endl;
     }
-    else(num == 0);{
-        return 0;
-    }
-    return 0;
  }
+ */

@@ -1,8 +1,8 @@
-// #include "driver.cpp"
 #include "userData.h"
-#include "users.cpp"
+#include <fstream>
+#include <string>
+#include <iostream>
 
-using namespace std;
 
 // class UserData
 // {
@@ -13,9 +13,11 @@ using namespace std;
 //         short determineSign(short month, short day);
 // };
 
-short determineSign(short month, short day)
+/*
+string determineSign(short month, short day)
 {
     short monthMin[12] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+    string zodiacMonthSigns[12] = {"Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"};
     // Define the zodiac sign ranges
     short zodiacRanges[12][12] = {
         {80, 109},   // Aries
@@ -31,7 +33,7 @@ short determineSign(short month, short day)
         {20, 49},    // Aquarius
         {50, 79}     // Pisces
     };
-    short sign;
+    string sign;
     short daySum;
 
     daySum = monthMin[month - 1] + day;
@@ -41,9 +43,15 @@ short determineSign(short month, short day)
     {
         if (daySum >= zodiacRanges[i][0] && daySum <= zodiacRanges[i][1]) 
         {
-            sign = i;
+            sign = zodiacMonthSigns[i];
             break;
         }
     }
     return sign;
 }
+*/
+
+
+/*
+
+*/
