@@ -32,7 +32,7 @@ void printOut()
     "Think physical pleasures and material goods, \n"
     "for those born under this sign revel in delicious excess.\n" << endl;
     
-        cout <<"John Cena, George Clooney, and Lizzo." << endl;
+        cout <<"You share the same sign as: John Cena, George Clooney, and Lizzo." << endl;
     }
 
     else if(num == 3){
@@ -45,7 +45,7 @@ void printOut()
     "The driving force behind a Gemini zodiac sign's conversation is their mind. Ruling the third house, \n"
     "the Gemini-born are intellectually inclined, forever probing people and places in search of information.\n" << endl;
 
-        cout << "John F. Kennedy, Kendrick Lamar, and Morgan Freeman." << endl;
+        cout << "You share the same sign as: John F. Kennedy, Kendrick Lamar, and Morgan Freeman." << endl;
     }
 
     else if(num == 4){
@@ -59,7 +59,7 @@ void printOut()
     "More than likely, their family will be large, too—the more, the merrier!\n"
     "Cancers will certainly be merry if their home life is serene and harmonious.\n" << endl;
 
-        cout << "Selena Gomez, Lionel Messi, and Elon Musk." << endl;
+        cout << "You share the same sign as: Selena Gomez, Lionel Messi, and Elon Musk." << endl;
     }
 
     else if(num == 5){
@@ -73,7 +73,7 @@ void printOut()
     "and their strength of purpose allows them to accomplish a great deal. \n"
     "The fact that this horoscope sign is also creative makes their endeavors fun for them and everyone else.\n" << endl;
     
-        cout << "Barack Obama, Kylie Jenner, and Chris Hemsworth." << endl;
+        cout << "You share the same sign as: Barack Obama, Kylie Jenner, and Chris Hemsworth." << endl;
     }
 
     else if(num == 6){
@@ -86,7 +86,7 @@ void printOut()
     "(and they can be), but their 'attention to detail' is for a reason: to help others. \n"
     "Virgos, more than any other zodiac sign, were born to serve, and it gives them great joy.\n" << endl;
     
-        cout << "Michael Jackson, Adam Sandler, Kobe Bryant." << endl;
+        cout << "You share the same sign as: Michael Jackson, Adam Sandler, Kobe Bryant." << endl;
     }
 
     else if(num == 7){
@@ -99,7 +99,7 @@ void printOut()
     "While they are true team players at work, their favorite partnership is at home: marriage. \n"
     "Libras feel most complete when they are coupled up with their lover, forever.\n" << endl;
 
-        cout << "Vladimir Putin, Snoop Dogg, and Mahatma Gandhi." << endl;
+        cout << "You share the same sign as: Vladimir Putin, Snoop Dogg, and Mahatma Gandhi." << endl;
     }
 
     else if(num == 8){
@@ -112,7 +112,7 @@ void printOut()
     "There's no fluff or chatter for Scorpios, either; \n"
     "these folks will zero-in on the essential questions, gleaning the secrets that lie within.\n" << endl;
 
-        cout << "Leonardo Di'Caprio, Hillary Clinton, and Bill Gates." << endl;
+        cout << "You share the same sign as: Leonardo Di'Caprio, Hillary Clinton, and Bill Gates." << endl;
     }
 
     else if(num == 9){
@@ -124,7 +124,7 @@ void printOut()
     "It's not a mindless ramble for these folks, either. Sags are truth-seekers, \n"
     "and the best way for them to do this is to hit the road, talk to others and get some answers.\n" << endl;
     
-        cout << "Taylor Swift, Kai Cenat, and Kylian Mbappe." << endl;
+        cout << "You share the same sign as: Taylor Swift, Kai Cenat, and Kylian Mbappe." << endl;
     }
 
     else if(num == 10){
@@ -138,7 +138,7 @@ void printOut()
     "Life is one big project for these folks, \n"
     "and they adapt to this by adopting a businesslike approach to most everything they do.\n" << endl;
 
-        cout << "Dezel Washington, Lebron James, and Steve Harvey." << endl;
+        cout << "You share the same sign as: Dezel Washington, Lebron James, and Steve Harvey." << endl;
     }
     
     else if(num == 11){
@@ -151,7 +151,7 @@ void printOut()
     "Those of the Aquarius zodiac sign are humanitarian, \n"
     "philanthropic, and keenly interested in making the world a better place.\n" << endl;
 
-        cout << "Jennifer Anisten, Dr. Dre, and Chris Rock." << endl;
+        cout << "You share the same sign as: Jennifer Anisten, Dr. Dre, and Chris Rock." << endl;
     }
 
     else if(num == 12){
@@ -164,7 +164,7 @@ void printOut()
     "Pisces, however, are happiest keeping many of these qualities under wraps. \n"
     "These folks are selfless, spiritual, and very focused on their inner journey.\n" << endl;
     
-        cout << "Millie Bobby Brown, Stephen Curry, and George Washington." << endl;
+        cout << "You share the same sign as: Millie Bobby Brown, Stephen Curry, and George Washington." << endl;
     }
  }
  */
