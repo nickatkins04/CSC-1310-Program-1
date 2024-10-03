@@ -16,7 +16,7 @@ class UserData
 {
     private:
         string name, sign;
-        short day, month, year, signNum;
+        short day, month, year, signNum, profileNum;
         string horoscopes[12] = {
         "Changes taking place at home could lead to more income, Whatever it is, it may not seem like much,\nbut it should make a difference in your financial situation in the long run.", // Aries
         "A walk through your neighborhood could put you in the middle of an unexpected, interesting event.\nWhatever it is, you could be transfixed by it. Make mental notes and then write down your impressions later.", // Taurus
@@ -34,14 +34,8 @@ class UserData
         
     public:
         UserData(){}
-        /*
-        string getName();
-        short getMonth();
-        short getDay();
-        short getYear();
-        string getSign();
-        */
 
+        /*
         UserData(string n, short d, short m, short y, string s)
         {
             name = n;
@@ -49,6 +43,15 @@ class UserData
             day = d;
             year = y;
             sign = s;
+        }
+        */
+
+        // Test
+        UserData(string n, string s, short pN)
+        {
+            name = n;
+            sign = s;
+            profileNum = pN;
         }
 
         // Getters
@@ -68,13 +71,18 @@ class UserData
         {
             return year;
         }
+        short getProfileNum()
+        {
+            return profileNum;
+        }
         string getSign()
         {
             return sign;
         }
 
+
         // Setters
-        void setName(string& name) 
+        void setName(string name) 
         {
             this->name = name;
         }
@@ -94,7 +102,7 @@ class UserData
             this->year = year;
         }
 
-        void setSign(string& sign)
+        void setSign(string sign)
         {
             this->sign = sign;
         }
@@ -147,7 +155,8 @@ class UserData
             short monthMin[12] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
             string zodiacMonthSigns[12] = {"Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"};
             // Define the zodiac sign ranges
-            short zodiacRanges[12][12] = {
+            short zodiacRanges[12][12] = 
+            {
                 {80, 109},   // Aries
                 {110, 140},  // Taurus
                 {141, 171},  // Gemini
@@ -177,24 +186,36 @@ class UserData
             }
             return sign;
         }
-        
+        /*
         // Loads user info from profiles.txt 
         bool loadProfiles(UserData **user, bool canShowProfiles)
         {
             ifstream inputFile;
             inputFile.open("profiles.txt");
             string buffer;
-
+            string name, sign;
             if (inputFile.is_open())
             {
-                string name = "", sign;
                 for (int i = 0; i < MAXUSERS; i++)
                 {
+                    name = "", sign = "";
                     if (getline(inputFile, name, '#'))
                     {
-                        user[i]->setName(name);
+                        cout << "Death 1." << endl; // Used to see how far this function goes before dying
+                        cin.get();
+                        //user[i]->setName(name);
                         getline(inputFile, sign, '#');
-                        user[i]->setSign(sign);
+                        cout << "Help4" << endl;
+                        cin.get();
+                        //user[i]->setSign(sign);
+                        cout << "Death 2?" << endl; // Used to see how far this function goes before dying
+                        cin.get();
+                        getline(inputFile, buffer, '#'); // Program crashes here with no error
+                        profileNum = stoi(buffer);
+                        cout << "Death 3" << endl;
+                        cin.get();
+                        user[i] = new UserData(name, sign, profileNum);
+                        cin.get();
                         canShowProfiles = true;
                     }
                     if (i == 0 && name == "")
@@ -208,30 +229,97 @@ class UserData
             inputFile.close();
             return canShowProfiles;
         }
+        */
 
-        short showProfiles(UserData **user, short selection, bool canShowProfiles)
+        //Attempt 2
+        
+        short loadProfiles(UserData **user) 
         {
-            if (canShowProfiles)
-            {
-                for (int i = 0; i < MAXUSERS; i++)
-                {
-                    cout << "-----------------------------------------------------------------------------" << endl;
-                    cout << "----------------------------------Profile " << i+1 << endl;
-                    cout << "Name: " << name << endl;
-                    cout << "Sign: " << sign << endl;
-                    cout << "-----------------------------------------------------------------------------" << endl;
-                }
-                for (int i = 0; i < MAXUSERS; i++)
-                {
-                    cout << i+1 << ": " << name << endl;
-                }
-                cout << "Select a profile: ", cin >> selection, cout << endl;
-                return selection;
-                system("CLS");
+            ifstream inputFile("profiles.txt");
+            string buffer = "";
+            string name, sign;
+            short numProfiles = 0;
+
+            if (!inputFile.is_open()) {
+                cout << "Failed to open profiles.txt." << endl;
+                return numProfiles;
             }
-            else
+
+            for (int i = 0; i < MAXUSERS; i++) {
+                name = "", sign = "";
+                
+                if (getline(inputFile, name, '#') && !name.empty()) {
+                    numProfiles++;
+                    if (!getline(inputFile, sign, '#')) {
+                        cout << "Failed to read sign for user " << i << endl;
+                        break; // Exit if we can't read sign
+                    }
+                    if (!getline(inputFile, buffer, '#')) {
+                        cout << "Failed to read profile number for user " << i << endl;
+                        break; // Exit if we can't read profile number
+                    }
+
+                    stoi(buffer);
+
+                    user[i] = new UserData(name, sign, (stoi(buffer) + 1));
+                }
+                
+                if (i == 0 && name.empty()) {
+                    cout << "\nNo profiles found in file. Create a profile first to get your horoscope!" << endl;
+                    break;
+                }
+            }
+
+            inputFile.close();
+            return numProfiles;
+        }
+        
+        short showProfiles(UserData **user, short selection, short numProfiles)
+        {
+            string name, sign;
+            short profileNum;
+            bool showingProfiles = true;
+            while (showingProfiles)
             {
-                cout << "Cannot display profiles. " << endl;
+                if (numProfiles > 0)
+                {
+                    for (int i = 0; i < numProfiles; i++)
+                    {
+                        name = user[i]->getName();
+                        sign = user[i]->getSign();
+                        profileNum = user[i]->getProfileNum();
+                        cout << "-----------------------------------------------------------------------------" << endl;
+                        cout << "----------------------------------Profile " << i+1 << endl;
+                        cout << "Name: " << name << endl;
+                        cout << "Sign: " << sign << endl;
+                        cout << "-----------------------------------------------------------------------------" << endl;
+                    }
+                    for (int i = 0; i < numProfiles; i++) // This never runs for some reason
+                    {
+                        name = user[i]->getName();
+                        cout << i+1 << ": " << name << endl;
+                    }
+                    bool gettingSelection = true;
+                    cout << "-----------------------------------------------------------------------------" << endl;
+                    cout << "Select a profile: ", cin >> selection, cout << endl;
+                    if(selection > 0 && selection <= 5)
+                    {
+                        selection--;
+                        return selection;
+                        system("CLS");
+                    }
+                    else
+                    {
+                        cout << "Please only select an option from the list." << endl;
+                        cout << "Press enter to continue." << endl;
+                        cin.get();
+                        continue;
+                    }
+                }
+                else
+                {
+                    cout << "Cannot display profiles. " << endl;
+                }
             }
             return 0;
         }
@@ -247,7 +335,7 @@ class UserData
                 sign = user[i]->getSign();
                 if (outputFile.is_open())
                 {
-                    outputFile << user[i]->getName() << '#' << user[i]->getSign() << '#';    // Program stops here
+                    outputFile << user[i]->getName() << '#' << user[i]->getSign() << '#' << user[i]->getProfileNum() << '#'; 
                     cout << "Success!" << endl;
                     break;
                 }

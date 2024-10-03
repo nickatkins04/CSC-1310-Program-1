@@ -50,8 +50,3 @@ string determineSign(short month, short day)
     return sign;
 }
 */
-
-
-/*
-
-*/

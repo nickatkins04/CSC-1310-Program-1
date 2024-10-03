@@ -13,13 +13,14 @@ int main()
     dataArr = new UserData*[MAXUSERS];
 
     // main menu function variables
-    short selection, profileNum = 0;
-    bool mainMenu = true, enteringProfileData = false, selectingProfile = false, viewingProfile = false,mainLoop = true, canShowProfiles;
+    short selection, profileNum = 0, numProfiles = 0;
+    bool mainMenu = true, enteringProfileData = false, selectingProfile = false, viewingProfile = false,mainLoop = true, canShowProfiles = false;
     // Profile function variables
     short day, month, year, signNum;
     string name, sign, dailyHoroscopePrint;
     char profileDataCheck;
-    dataArr[profileNum]->loadProfiles(dataArr, canShowProfiles);
+    numProfiles = dataArr[profileNum]->loadProfiles(dataArr);
+    
     while (mainLoop)
     {
         while(mainMenu)
@@ -51,29 +52,12 @@ int main()
         
         while (enteringProfileData)
         {
-            /*
-            for(int i = 0; i < MAXUSERS; i++)
-            {
-                name = dataArr[i]->getName();
-                if (name == "")
-                {
-                    profileNum = i;
-                }
-            }
-            */
             cout << "Enter your full name: ", getline(cin, name), cout << endl;
             cout << "Enter your birthday in a mt/dy/year format:" << endl;
             cout << "Month: ", cin >> month, cout << endl;
             cout << "Day: ", cin >> day, cout << endl;
             cout << "Year: ", cin >> year, cout << endl;
-
-            cout << "HELP1" << endl;
             sign = dataArr[profileNum]->determineSign(month, day);
-            cout << "HELP2" << endl;
-            //signNum = dataArr[profileNum]->determineSignNum(month, day);
-            cout << "HELP3" << endl;
-
-            
 
             system("CLS");
             
@@ -83,9 +67,8 @@ int main()
             cin.ignore();
             if (profileDataCheck == 'y' or profileDataCheck == 'Y')
             {
-                //sign = dataArr[profileNum]->getSign();
-                cout << "Zodiac Sign: " << sign << endl;
-                dataArr[profileNum] = new UserData(name, month, day, year, sign);
+                dataArr[profileNum] = new UserData(name, sign, profileNum);
+                dataArr[profileNum]->saveToFile(dataArr);
                 enteringProfileData = false;
                 viewingProfile = true;
             }
@@ -93,8 +76,8 @@ int main()
         }   
         while (selectingProfile) // Function call to horoscope profile information getter thing (later)
         {
-            profileNum = dataArr[profileNum]->showProfiles(dataArr, selection, canShowProfiles);
-            if (profileNum == 0)
+            profileNum = dataArr[profileNum]->showProfiles(dataArr, selection, numProfiles);
+            if (profileNum < 0)
             {
                 selectingProfile = false;
                 mainMenu = true;
@@ -117,10 +100,12 @@ int main()
         while (viewingProfile)
         {
             system("CLS");
+            name = dataArr[profileNum]->getName();
+            sign = dataArr[profileNum]->getSign();
             cout << "==============================" << endl;
-            cout << dataArr[profileNum]->getName() << "\'s profile" << endl;
+            cout << name << "\'s profile" << endl;
             cout << "==============================" << endl;
-            cout << "Sign: " << dataArr[profileNum]->getSign() << endl;
+            cout << "Sign: " << sign << endl;
             cout << "------------------------------" << endl;
             cout << "1. View Horoscope" << endl;
             cout << "2. Compare with other profiles" << endl;
@@ -132,6 +117,7 @@ int main()
             {
             case 1:
                 dataArr[profileNum]->printOut(dataArr, profileNum);
+                cout << "\n===================" << endl;
                 cout << "Daily Horoscope: " << endl;
                 signNum = dataArr[profileNum]->determineSignNum(month, day);
                 dailyHoroscopePrint = dataArr[profileNum]->dailyHoroscope(signNum);
@@ -165,38 +151,3 @@ int main()
     }
     return 0;
 }
-
-// short determineSign(short month, short day)
-// {
-//     short monthMin[12] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
-//     // Define the zodiac sign ranges
-//     short zodiacRanges[12][12] = {
-//         {80, 109},   // Aries
-//         {110, 140},  // Taurus
-//         {141, 171},  // Gemini
-//         {172, 203},  // Cancer
-//         {204, 234},  // Leo
-//         {235, 265},  // Virgo
-//         {266, 295},  // Libra
-//         {296, 325},  // Scorpio
-//         {326, 355},  // Sagittarius
-//         {356, 19},   // Capricorn (wraps around)
-//         {20, 49},    // Aquarius
-//         {50, 79}     // Pisces
-//     };
-//     short sign;
-//     short daySum;
-
-//     daySum = monthMin[month - 1] + day;
-
-//     // Determine zodiac sign based on daySum
-//     for (int i = 0; i < 12; i++) 
-//     {
-//         if (daySum >= zodiacRanges[i][0] && daySum <= zodiacRanges[i][1]) 
-//         {
-//             sign = i;
-//             break;
-//         }
-//     }
-//     return sign;
-// }
