@@ -10,17 +10,16 @@
 
 // using namespace std;
 
-const short MAXUSERS = 5;
-
 class UserData
 {
     private:
-        std::string name;
-        std::string sign;
-        short day;
-        short month;
-        short year;
-        short signNum;
+        
+        std::string* name;
+        std::string* sign;
+        short* day;
+        short* month;
+        short* year;
+        short* signNum;
         std::string horoscopes[12] = 
         {
             "Changes taking place at home could lead to more income, Whatever it is, it may not seem like much,\nbut it should make a difference in your financial situation in the long run.", // Aries
@@ -63,11 +62,11 @@ class UserData
         // Setters
         void setName(std::string& name);
 
-        void setDay(int day);
+        void setDay(short day);
 
-        void setMonth(int month);
+        void setMonth(short month);
 
-        void setYear(int year);
+        void setYear(short year);
 
         void setSign(std::string& sign);
 

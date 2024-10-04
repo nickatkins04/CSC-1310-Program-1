@@ -1,4 +1,5 @@
 #include "userData.h"
+#include "users.h"
 //#include "userData.cpp"
 
 using namespace std;
@@ -7,8 +8,9 @@ int main()
 {
     system("CLS");
 
+    UserData dataArr[MAXUSERS];
 
-    UserData** dataArr;
+    UserStorage** ptrToDataArr = &dataArr;
 
     dataArr = new UserData*[MAXUSERS];
 
@@ -19,6 +21,7 @@ int main()
     short day, month, year, signNum;
     string name, sign, dailyHoroscopePrint;
     char profileDataCheck;
+    UserData currentData(10);
     dataArr[profileNum]->loadProfiles(dataArr, canShowProfiles);
     while (mainLoop)
     {

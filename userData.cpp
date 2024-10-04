@@ -3,61 +3,63 @@
 #include <string>
 #include <iostream>
 
+const short MAXUSERS = 5;
+
 UserData::UserData(std::string n, short d, short m, short y, std::string s)
 {
-    name = n;
-    month = m;
-    day = d;
-    year = y;
-    sign = s;
+    *name = n;
+    *month = m;
+    *day = d;
+    *year = y;
+    *sign = s;
 }
 
 // Getters
 std::string UserData::getName()
 {
-    return name;
+    return *name;
 }
 short UserData::getMonth()
 {
-    return month;
+    return *month;
 }
 short UserData::getDay()
 {
-    return day;
+    return *day;
 }
 short UserData::getYear()
 {
-    return year;
+    return *year;
 }
 std::string UserData::getSign()
 {
-    return sign;
+    return *sign;
 }
 
 // Setters
 void UserData::setName(std::string &name)
 {
-    this->name = name;
+    this->name = &name;
 }
 
-void UserData::setDay(int day)
+void UserData::setDay(short day)
 {
-    this->day = day;
+    this->day = &day;
 }
 
-void UserData::setMonth(int month)
+void UserData::setMonth(short month)
 {
-    this->month = month;
+    this->month = &month;
 }
 
-void UserData::setYear(int year)
+void UserData::setYear(short year)
 {
-    this->year = year;
+    this->year = &year;
 }
 
 void UserData::setSign(std::string &sign)
 {
-    this->sign = sign;
+    this->sign = &sign;
 }
 
 // Optional: A method to display user information

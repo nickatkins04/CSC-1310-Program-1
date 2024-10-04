@@ -10,7 +10,16 @@ using namespace std;
 class UserStorage
 {
     private:
-        short** ptrToUserDataPtr;
+        short** ptrToDataArr;
+        short MAXSIZE;
+        short numProfiles;
+    public:
+        UserStorage(short MAXSIZE);
+
+        ~UserStorage();
+
+        void readData(const std::string& userData);
+        
 };
 
 #endif
