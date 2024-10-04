@@ -81,7 +81,7 @@ int main()
             dataArr[profileNum]->displayInfo(name, sign);
             cout << "Is this data correct? (y/n): ", cin >> profileDataCheck, cout << endl;
             cin.ignore();
-            if (profileDataCheck == 'y' or profileDataCheck == 'Y')
+            if (profileDataCheck == 'y' || profileDataCheck == 'Y')
             {
                 //sign = dataArr[profileNum]->getSign();
                 cout << "Zodiac Sign: " << sign << endl;
