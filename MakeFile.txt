@@ -1,0 +1,17 @@
+output: driver.o userData.o printout.o user.o
+    g++ driver.o userData.o printout.o user.o -o output
+
+Driver.o: driver.cpp
+    g++ -c driver.cpp
+
+userData.o: userData.cpp userData.h
+    g++ -c userData.cpp
+
+printout.o: printout.cpp
+    g++ -c printout.cpp
+
+user.o: user.cpp user.h
+    g++ -c user.cpp
+
+clean:
+    rm *.o output
