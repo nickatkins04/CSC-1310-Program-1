@@ -8,11 +8,8 @@ int main()
 {
     system("CLS");
 
-    UserData dataArr[MAXUSERS];
+    UserStorage storage(100);
 
-    UserStorage** ptrToDataArr = &dataArr;
-
-    dataArr = new UserData*[MAXUSERS];
 
     // main menu function variables
     short selection, profileNum = 0;
@@ -21,7 +18,6 @@ int main()
     short day, month, year, signNum;
     string name, sign, dailyHoroscopePrint;
     char profileDataCheck;
-    UserData currentData(10);
     dataArr[profileNum]->loadProfiles(dataArr, canShowProfiles);
     while (mainLoop)
     {
