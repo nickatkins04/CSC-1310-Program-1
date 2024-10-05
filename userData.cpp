@@ -91,8 +91,10 @@ void UserData::setSign(std::string &sign)
 }
 
 // Optional: A method to display user information
-void displayInfo(std::string name, std::string sign)
+void displayInfo()
 {
+    std::string name;
+    std::string sign;
     std::cout << "Here is your profile:" << std::endl;
     std::cout << "Name: " << name << std::endl;
     std::cout << "Zodiac Sign: " << sign << std::endl;
@@ -175,7 +177,7 @@ std::string UserData::dailyHoroscope(short signNum)
     return horoscopes[signNum];
 };
 
-void UserData::printAstrologyInfo(AstrologyInfo *astrologyInfo)
+void UserData::printAstrologyInfo()
 {
     if (astrologyInfo != nullptr)
     {
@@ -265,8 +267,11 @@ void saveToFile(UserData **user)
     }
     outputFile.close();
 }
-void printAstrologyInfo(UserData **user, short profileNum)
+
+void printAstrologyInfo()
 {
+    UserData **user; 
+    short profileNum;
 
     std::string sign = user[profileNum]->getSign();
 

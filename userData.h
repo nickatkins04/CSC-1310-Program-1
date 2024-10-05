@@ -1,7 +1,6 @@
 #ifndef USERDATA_H
 #define USERDATA_H  
 
-//#include "driver.cpp"
 #include "AstrologyInfo.h"
 #include <fstream> // Used for save files
 #include <iostream>
@@ -52,7 +51,7 @@ class UserData
         void setSign(std::string &sign);
 
         // Optional: A method to display user information
-        void displayInfo(std::string name, std::string sign);
+        void displayInfo();
 
         short determineSignNum(short month, short day);
 
@@ -70,7 +69,7 @@ class UserData
         std::string dailyHoroscope(short signNum);
 
         //Prints astrology info
-        void printAstrologyInfo(AstrologyInfo *astrologyInfo);
+        void printAstrologyInfo();
 };
 
 #endif

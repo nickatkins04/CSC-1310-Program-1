@@ -5,6 +5,8 @@
 
 UserStorage::UserStorage(short MAXSIZE)
 {
+    numProfiles = 0;
+
     users = new UserData*[MAXSIZE];
     for (short i = 0; i < MAXSIZE; i++)
         users[i] = nullptr;
@@ -27,6 +29,14 @@ void UserStorage::readData(const std::string &filename)
         return;
     }
 
+    std:: string name, sign;
+    short month, day, year;
+    while (infile >> name >> month >> day >> year >> sign)
+    {
+        addUser(new UserData(name, day, month, year, sign));
+    }
+    
+
     infile.close();
 }
 
@@ -37,7 +47,8 @@ void UserStorage::printAllUsers()
 
     for (short i = 0; i < numProfiles; i++)
     {
-        users[i]->displayInfo(name, sign);
+        std::cout << "Profile " << (i + 1) << ":" << std::endl;
+        users[i]->displayInfo();
 
     }
     

@@ -1,6 +1,7 @@
 #ifndef ASTROLOGYINFO_H
 #define ASTROLOGYINFO_H
 
+#include "AstrologyInfo.cpp"
 #include <string>
 
 class AstrologyInfo
@@ -14,6 +15,7 @@ class AstrologyInfo
 
     public:
         AstrologyInfo (std::string& sign);
+
         ~AstrologyInfo();
 
         void printInfo();
