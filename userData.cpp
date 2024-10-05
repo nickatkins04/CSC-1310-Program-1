@@ -265,7 +265,7 @@ void saveToFile(UserData **user)
     }
     outputFile.close();
 }
-void printOut(UserData **user, short profileNum)
+void printAstrologyInfo(UserData **user, short profileNum)
 {
 
     std::string sign = user[profileNum]->getSign();

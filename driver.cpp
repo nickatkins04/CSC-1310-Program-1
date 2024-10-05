@@ -2,8 +2,6 @@
 #include "users.h"
 //#include "userData.cpp"
 
-using namespace std;
-
 int main()
 {
     system("CLS");
@@ -12,13 +10,15 @@ int main()
 
 
     // main menu function variables
-    short selection, profileNum = 0;
+    short selection = 0, profileNum = 0;
     bool mainMenu = true, enteringProfileData = false, selectingProfile = false, viewingProfile = false,mainLoop = true, canShowProfiles;
     // Profile function variables
-    short day, month, year, signNum;
+    short day = 0, month = 0, year = 0, signNum = 0;
     string name, sign, dailyHoroscopePrint;
-    char profileDataCheck;
-    dataArr[profileNum]->loadProfiles(dataArr, canShowProfiles);
+    char profileDataCheck = 'n';
+
+    storage.readData("profiles.txt");
+
     while (mainLoop)
     {
         while(mainMenu)
@@ -43,94 +43,115 @@ int main()
                 mainMenu = false;
                 break;
             case 3:
-                return 0;
+                mainLoop = false;
+                mainMenu = false;
+                break;
+            default:
+                cout << "Invalid selection. Please try again." << endl;
             }
             system("CLS");
         }
         
         while (enteringProfileData)
         {
-            /*
-            for(int i = 0; i < MAXUSERS; i++)
-            {
-                name = dataArr[i]->getName();
-                if (name == "")
-                {
-                    profileNum = i;
-                }
-            }
-            */
-            cout << "Enter your full name: ", getline(cin, name), cout << endl;
+            cout << "Enter your full name: ", getline(cin, name);
+            cout << endl;
+            getline (cin, name);
+
             cout << "Enter your birthday in a mt/dy/year format:" << endl;
-            cout << "Month: ", cin >> month, cout << endl;
-            cout << "Day: ", cin >> day, cout << endl;
-            cout << "Year: ", cin >> year, cout << endl;
+            cout << "Month: ";
+            cin >> month;
+            cout << endl;
+            cout << "Day: ";
+            cin >> day;
+            cout << endl;
+            cout << "Year: ";
+            cin >> year;
+            cin.ignore();
+            cout << endl;
 
-            cout << "HELP1" << endl;
-            sign = dataArr[profileNum]->determineSign(month, day);
-            cout << "HELP2" << endl;
-            //signNum = dataArr[profileNum]->determineSignNum(month, day);
-            cout << "HELP3" << endl;
-
-            
+            //Temporary UserData object to determine sign
+            UserData tempUser(name, month, day, year, sign);
+            sign = tempUser.getSign();
+            signNum = tempUser.determineSignNum(month, day);
 
             system("CLS");
             
             //Function for printing out profile info
-            dataArr[profileNum]->displayInfo(name, sign);
-            cout << "Is this data correct? (y/n): ", cin >> profileDataCheck, cout << endl;
+            tempUser.displayInfo(name, sign);
+            cout << "Is this data correct? (y/n): ";
+            cin >> profileDataCheck;
+            cout << endl;
             cin.ignore();
             if (profileDataCheck == 'y' || profileDataCheck == 'Y')
             {
-                //sign = dataArr[profileNum]->getSign();
+                //Add new user to storage
+                storage.addUser(new UserData(name, month, day, year, sign));
                 cout << "Zodiac Sign: " << sign << endl;
-                dataArr[profileNum] = new UserData(name, month, day, year, sign);
                 enteringProfileData = false;
                 viewingProfile = true;
+                profileNum = storage.getNumUsers() - 1;
             }
             system("CLS");
         }   
+
         while (selectingProfile) // Function call to horoscope profile information getter thing (later)
         {
-            profileNum = dataArr[profileNum]->showProfiles(dataArr, selection, canShowProfiles);
+            //Display profiles
+            storage.printAllUsers();
+            cout << "Select a profile by number (or 0 to go back): ";
+            cin >> profileNum;
+            cin.ignore();
+
             if (profileNum == 0)
             {
                 selectingProfile = false;
                 mainMenu = true;
             }
-            else
+            else if (profileNum > 0 && profileNum <= storage.getNumUsers())
             {
                 selectingProfile = false;
                 viewingProfile = true;
+                profileNum -= 1;
+            }
+            else
+            {
+                cout << "Invalid profile number. Please try again." << endl;
             }
 
-            // V V V Old V V V 
-            /*
-            cout << "No profiles available at this time" << endl;
-            cout << "Hit enter to continue. " << endl;
-            cin.get();
-            selectingProfile = false;
-            system("CLS");
-            */
         }
         while (viewingProfile)
         {
             system("CLS");
+
+            UserData* currentUser = storage.getUser(profileNum);
+            if (currentUser == nullptr)
+            {
+                cout << "Profile not found." << endl;
+                viewingProfile = false;
+                mainMenu = true;
+                break;
+            }
+
             cout << "==============================" << endl;
-            cout << dataArr[profileNum]->getName() << "\'s profile" << endl;
+            cout << currentUser->getName() << "\'s profile" << endl;
             cout << "==============================" << endl;
-            cout << "Sign: " << dataArr[profileNum]->getSign() << endl;
+            cout << "Sign: " << currentUser->getSign() << endl;
             cout << "------------------------------" << endl;
             cout << "1. View Horoscope" << endl;
             cout << "2. Compare with other profiles" << endl;
             cout << "3. Edit profile" << endl; 
             cout << "4. Go back to main menu" << endl;
             cout << "------------------------------" << endl;
-            cout << "Selection: ", cin >> selection, cout << endl;
+            cout << "Selection: ";
+            cin >> selection;
+            cin.ignore();
+            cout << endl;
+
             switch (selection)
             {
             case 1:
-                dataArr[profileNum]->printOut(dataArr, profileNum);
+                currentUser->printAstrologyInfo(astrologyInfo);
                 cout << "Daily Horoscope: " << endl;
                 signNum = dataArr[profileNum]->determineSignNum(month, day);
                 dailyHoroscopePrint = dataArr[profileNum]->dailyHoroscope(signNum);

@@ -18,7 +18,7 @@ UserStorage::~UserStorage()
     delete[] users;
 }
 
-void UserStorage::readData(std::string &filename)
+void UserStorage::readData(const std::string &filename)
 {
     std::ifstream infile(filename);
     if (!infile)
@@ -28,7 +28,6 @@ void UserStorage::readData(std::string &filename)
     }
 
     infile.close();
-
 }
 
 void UserStorage::printAllUsers()
@@ -50,4 +49,20 @@ void UserStorage::addUser(UserData* user)
         users[numProfiles++] = user;
     else
         std::cout << "Storage is full. Cannot add more users." << std::endl;
+}
+
+short UserStorage::getNumUsers() const
+{
+    return numProfiles;
+}
+
+UserData* UserStorage::getUser(short index) const
+{
+    if (index >= 0 && index < numProfiles)
+        return users[index];
+    else
+    {
+        cout << "Invalid index: " << index << ". Returning nullptr." << endl;
+        return nullptr;
+    }
 }

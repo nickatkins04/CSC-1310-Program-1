@@ -18,10 +18,13 @@ class UserStorage
 
         ~UserStorage();
 
-        void readData(std::string& userData);
+        void readData(const std::string& userData);
         void printAllUsers();
         void addUser(UserData* user);
         
+        short getNumUsers() const;
+        UserData* getUser(short index) const;
+
 };
 
 #endif
